@@ -89,7 +89,7 @@ type: frontend
 
 ## 데이터 및 연동
 
-- 지원 신청과 댓글의 source of truth는 `support-request-backend.md`가 정의하는 `/support-requests` API다.
+- 지원 신청과 댓글의 source of truth는 `tasks/completed/support-request-backend.md`가 정의하는 `/support-requests` API다.
 - 목록은 `GET /support-requests`, 상세는 `GET /support-requests/{supportRequestId}`, 등록은 `POST /support-requests`, 수정과 삭제는 해당 item의 `PUT`과 `DELETE`, 댓글 등록은 `POST /support-requests/{supportRequestId}/comments`를 사용한다.
 - 목록, 상세, 수정 가능 여부와 댓글 목록은 요청 성공 뒤 API 응답으로 즉시 갱신한다. 수정이 `409 Conflict`로 거절되면 상세를 다시 조회해 첫 댓글 생성 상태를 반영한다.
 - Discord 운영 채널 메시지와 DM, 사이트 내 알림은 Backend의 동작이며 Frontend는 전달 성공 여부를 표시하거나 재전송하지 않는다.
