@@ -63,10 +63,12 @@ fun `사용자가 존재하지 않으면 NotFoundException을 던진다`() {
 
 ## 테스트 범위
 
-- **Service 테스트**: 작성 (비즈니스 로직 검증)
-- **Controller 테스트**: 작성하지 않음 (Controller는 단순 위임만 하므로 Service 테스트로 충분)
+- **Service 테스트**: 비즈니스 로직을 검증한다.
+- **Controller 테스트**: API의 권한(`@Auth`·`@GroupAuth`로 누가 허용·거부되는지)을 검증한다. 권한은 컨트롤러 메서드의 선언에 있으므로 Service 테스트에서 권한 판정을 직접 호출해 흉내 내지 않는다.
+  - `@WebMvcTest`, `MockMvc`, `@EnableAspectJAutoProxy`를 사용하고, 검사할 Aspect(`AuthAspect`, `GroupAuthAspect`)와 판정 서비스를 `@Import`로 등록한다.
+  - API마다 선언한 권한이 정책과 맞는지 허용·거부 사례로 확인한다. 공개 범위별 세부 판정처럼 판정기 자체의 규칙은 판정기 테스트에서 검증한다.
 
 ## 역할 범위
 
-- **O**: Service 테스트 작성
-- **X**: Controller 테스트 작성, 프로덕션 코드 작성 (별도 skill 사용)
+- **O**: Service 테스트 작성, Controller 권한 테스트 작성
+- **X**: 프로덕션 코드 작성 (별도 skill 사용)
